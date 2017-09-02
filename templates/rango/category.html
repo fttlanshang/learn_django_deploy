@@ -1,0 +1,28 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_content %}
+    {{ category.name }}
+{% endblock %}
+
+{% block body_content %}
+    {% if category %}
+        <h1>{{ category.name }}</h1>
+
+        {% if pages %}
+        <ul>
+            {% for page in pages %}
+            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>Now this category doesn't have any pages yet.</p>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <a href="{% url 'add_page' category.slug %}">Add a page</a>
+        {% endif %}
+    {% else %}
+        <p>No specified Category.</p>
+    {% endif %}
+{% endblock %}
+

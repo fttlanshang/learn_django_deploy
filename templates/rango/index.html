@@ -1,0 +1,34 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_content %}
+    Index
+{% endblock %}
+
+{% block body_content %}
+    {% if categories %}
+    <h1>Top 5 liked Categories</h1>
+    <ul>
+        {% for category in categories %}
+        <li>
+            <a href="{% url 'show_category' category.slug %}">
+                {{ category.name }}
+            </a>    
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %} 
+        <div>There are no categories present.</div>
+    {% endif %}
+
+    {% if pages %}
+    <h1>Top 5 Viewd Pages</h1>
+    <ul>
+        {% for page in pages %}
+        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %} 
+        <div>There are no pages present.</div>
+    {% endif %}
+{% endblock %}
