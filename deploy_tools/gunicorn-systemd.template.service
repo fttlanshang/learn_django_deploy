@@ -1,0 +1,12 @@
+[Unit]
+Description=Gunicorn server for SITENAME
+
+[Service]
+Restart=on-failure
+User=fttlanshang
+WorkingDirectory=/home/fttlanshang/sites/SITENAME/source
+ExecStart=/home/fttlanshang/sites/SITENAME/virtualenv/bin/gunicorn \
+	--bind unix:/tmp/SITENAME.socket \
+	tango_with_django_project.wsgi:application
+[Install]
+WantedBy=multi-user.target
